@@ -3,6 +3,7 @@
 """
 import requests
 import json
+from common.config.config import Config, Default_Config
 
 
 class SendMethod:
@@ -14,20 +15,28 @@ class SendMethod:
     def send_method(self, method, url, params=None, data=None, headers=None):
         """封装请求方式"""
 
+        if headers is None:
+            headers = {"gameId": Default_Config["gameId"], "regionId": Default_Config["regionId"]}
         if method == "get" or method == "delete":
+            # 如果
             response = self.session.request(method=method, url=url, params=params, headers=headers)
         elif method == "post" or method == "put":
+            # 或者如果
             response = self.session.request(method=method, url=url, json=data, headers=headers)
         else:
+            # 否则
             print("请求方式不正确")
             response = None
+
         if method == "delete":
             return response.status_code
         else:
             try:
-                return response.json()
+                # 确保下面的语句能够正确，执行这个
+                return json.loads(response.text)
             except:
-                return response.status_code
+                # 当上面执行失败的时候，执行这个
+                return response.text
 
     @staticmethod
     def format_response(response):

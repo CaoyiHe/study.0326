@@ -5,7 +5,7 @@ import time
 
 
 class Config:
-    TITLE_CONFIG = "config"
+    # TITLE_CONFIG = "config"
     VERSION_ID = "versionId"
     AREA_ID = "areaId"
     URL = "url"
@@ -15,6 +15,7 @@ class Config:
         """
         初始化
         """
+        self.default_title = "config"
         self.config = ConfigParser()
         self.conf_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.ini')
         self.xml_report_path = Config.path_dir + '\\Report\\xml'
@@ -27,16 +28,17 @@ class Config:
         self.area_id = self.get_conf(Config.AREA_ID)
         self.url = self.get_conf(Config.URL)
 
-    def get_conf(self, value, title="config"):
+    def get_conf(self, value, title=None):
         """
         配置文件读取
         :param title:
         :param value:
         :return:
         """
+        title = title or self.default_title
         return self.config.get(title, value)
 
-    def set_conf(self, value, text, title="config"):
+    def set_conf(self, value, text, title=None):
         """
         配置文件修改
         :param title:
@@ -44,21 +46,28 @@ class Config:
         :param text:
         :return:
         """
+        title = title or self.default_title
         self.config.set(title, value, text)
         with open(self.conf_path, "w+") as f:
             return self.config.write(f)
 
-    def add_conf(self, title="config"):
+    def add_conf(self, title=None):
         """
         配置文件添加
         :param title:
         :return:
         """
+        title = title or self.default_title
         self.config.add_section(title)
         with open(self.conf_path, "w+") as f:
             return self.config.write(f)
 
 
+Default_Config = {}
+conf = Config()
+Default_Config["gameId"] = conf.get_conf("gameId")
+Default_Config["regionId"] = conf.get_conf("regionId")
+Default_Config["url"] = conf.get_conf("url")
 if __name__ == '__main__':
     conf = Config()
     print(conf.get_conf('url'))
