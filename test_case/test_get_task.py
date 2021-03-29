@@ -1,5 +1,8 @@
 from common.session import SendMethodEntity
 from common.config.config import Config, Default_Config
+import json
+from threading import Timer
+import time
 
 
 class GetTask:
@@ -13,7 +16,7 @@ class GetTask:
         url = self.url + f"api/task/{self.taskId}/approve"
         data = {
             "remark": "接口执行通过",
-            "status": 1
+            "status": 0
         }
         response = SendMethodEntity.send_method("post", url, data=data)
         print(response)
@@ -21,19 +24,31 @@ class GetTask:
 
     def test_task_particulars(self):
         # 查看任务详情
-        url = self.url + f"api/task/{self.taskId}/detail"
-        print(url)
-        response = SendMethodEntity.send_method("get", url, )
-        print(response)
-        return response
+        count = 0
+        while True:
+            url = self.url + f"api/task/{self.taskId}/detail"
+            response = SendMethodEntity.send_method("get", url, )
+            status = response["data"]["status"]
+            print(response)
+            if status == 7:
+                print(response)
+                break
+            if status == 8 or status == 30 or status == 20:
+                # 失败后对任务进行重试，重试三次后跳出循环
+                if count >= 1:
+                    raise ValueError("重试失败")
+                count += 1
+                response = SendMethodEntity.send_method("post", self.url + f"api/task/{self.taskId}/retry-skip", data={
+                    "action": 1
+                })
+            time.sleep(10)
 
     @staticmethod
-    def shenhe(taskId):
-        Get_Task = GetTask(taskId)
+    def test_code(task_id):
+        Get_Task = GetTask(task_id)
         Get_Task.test_check()
         Get_Task.test_task_particulars()
 
-# if __name__ == '__main__':
-#     test = GetTask(7365)
-#     test.test_check()
-#     test.test_task_particulars()
+
+if __name__ == '__main__':
+    GetTask(8793).test_task_particulars()

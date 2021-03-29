@@ -34,7 +34,27 @@ class TestStart:
         task_id = response["data"]["taskId"]
         return task_id
 
+    def test_guanfu(self):
+        data = {
+            "rangeData": [
+                {
+                    "areaId": self.areaId,
+                    "worlds": [
+                        3752
+                    ]
+                }
+            ],
+            "extraIds": [],
+            "gameId": 2117,
+            "regionId": "TJZYY",
+            "isForceKill": 1,
+            "executeTime": None
+        }
+        response = self.qifu.test_guanfu(data)
+        task_id = response["data"]["taskId"]
+        return task_id
+
 
 if __name__ == '__main__':
-    task_id = TestStart().test_qifu()
-    GetTask.shenhe(task_id)
+    task_id = TestStart().test_guanfu()
+    GetTask.test_code(task_id)

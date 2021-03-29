@@ -11,3 +11,8 @@ class StartServer:
         url = self.url + "api/task/start-game-world"
         response = SendMethodEntity.send_method("post", url, data=data)
         return response
+
+    def test_guanfu(self, data):
+        url = self.url + "api/task/close-game-world"
+        response = SendMethodEntity.send_method("post", url, data=data)
+        return response
