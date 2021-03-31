@@ -28,6 +28,8 @@ class StartServer:
         # 对外
         url = self.url + "api/task/foreign-world"
         response = SendMethodEntity.send_method("post", url, data=data)
+        task_id = response["data"]["taskId"]
+        GetTask.test_task_particulars(task_id)
         logging.info(response)
         return response
 
@@ -64,7 +66,16 @@ class StartServer:
         return response
 
     def test_stop_operate(self, data):
+        # 停运
         url = self.url + "api/task/stop-operate"
+        response = SendMethodEntity.send_method("post", url, data=data)
+        task_id = response["data"]["taskId"]
+        GetTask.test_code(task_id)
+        return response
+
+    def test_maintenance(self, data):
+        # 停服维护
+        url = self.url + "api/task/stop-maintenance"
         response = SendMethodEntity.send_method("post", url, data=data)
         task_id = response["data"]["taskId"]
         GetTask.test_code(task_id)

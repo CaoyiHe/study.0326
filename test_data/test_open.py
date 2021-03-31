@@ -6,7 +6,6 @@ from test_case.test_get_task import GetTask
 import time
 import _thread
 import threading
-# from _t
 
 
 class OpenService:
@@ -36,7 +35,7 @@ class OpenService:
                     "openTime": datetime.datetime.utcnow().isoformat() + 'Z',
                     "preCreateTime": None,
                     "specId": 43,
-                    "worldName": time.strftime("%m-%d") + "-自动化-公共" + time.strftime("%M:%S")
+                    "worldName": str(self.worldId_gong) + "-回归测试-公共区"
                 }
             ]
         }
@@ -61,7 +60,7 @@ class OpenService:
                     "openTime": datetime.datetime.utcnow().isoformat() + 'Z',
                     "preCreateTime": None,
                     "specId": 60,
-                    "worldName": self.worldId_gong + "-自动化-普通" + time.strftime("%M:%S")
+                    "worldName": str(self.worldId_gong) + "-回归测试-普通区-1"
                 }
             ]
         }
@@ -84,14 +83,10 @@ class OpenService:
                     "openTime": datetime.datetime.utcnow().isoformat() + 'Z',
                     "preCreateTime": None,
                     "specId": 60,
-                    "worldName": self.worldId_gong + "-自动化-普通" + time.strftime("%M:%S")
+                    "worldName": str(self.worldId_gong) + "-回归测试-普通区-2"
                 }
             ]
         }
-        # task_id2 = self.open.test_open_pu(data2)
-
-        # _thread.start_new_thread(self.open.test_open_pu, (data1, ))
-        # _thread.start_new_thread(self.open.test_open_pu, (data2, ))
         t1 = threading.Thread(target=self.open.test_open_pu, args=(data1,))
         t2 = threading.Thread(target=self.open.test_open_pu, args=(data2,))
         threads.append(t1)

@@ -17,7 +17,7 @@ class GetTask(object):
         url = self.url + f"api/task/{self.taskId}/approve"
         data = {
             "remark": "接口执行通过",
-            "status": 1
+            "status": 0
         }
         response = SendMethodEntity.send_method("post", url, data=data)
         logging.info(response)
