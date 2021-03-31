@@ -5,7 +5,7 @@ from threading import Timer
 import time
 
 
-class GetTask:
+class GetTask(object):
     def __init__(self, taskId):
         self.config = Config()
         self.url = self.config.get_conf('url')
@@ -51,4 +51,4 @@ class GetTask:
 
 
 if __name__ == '__main__':
-    GetTask(8793).test_task_particulars()
+    GetTask(8821).test_code(8821)

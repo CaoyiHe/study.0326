@@ -3,6 +3,7 @@
 """
 import requests
 import json
+from json import JSONDecodeError
 from common.config.config import Config, Default_Config
 
 
@@ -33,8 +34,11 @@ class SendMethod:
         else:
             try:
                 # 确保下面的语句能够正确，执行这个
-                return json.loads(response.text)
-            except:
+                response = json.loads(response.text)
+                if response["code"] != 0:
+                    raise ValueError(f"接口请求失败: {response['message']}")
+                return response
+            except JSONDecodeError:
                 # 当上面执行失败的时候，执行这个
                 return response.text
 

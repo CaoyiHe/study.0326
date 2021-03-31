@@ -1,0 +1,15 @@
+命名：
+common
+    send_method.py     封装HTTP请求
+        1.SendMethod：封装HTTP请求
+        1.1.send_method 封装HTTP请求
+        1.2.format_response 格式化返回数据
+        1.3.
+
+
+        test_qifu.py
+            StartServer
+            test_script  刷脚本
+            test_start   启服
+            test_guanfu  关服
+            test_clear   新区清数据

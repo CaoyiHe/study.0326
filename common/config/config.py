@@ -9,6 +9,9 @@ class Config:
     VERSION_ID = "versionId"
     AREA_ID = "areaId"
     URL = "url"
+    WORLDID_GONG = "worldId_gong"
+    WORLDID_PU1 = "worldId_pu1"
+    WORLDID_PU2 = "worldId_pu2"
     path_dir = str(os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir)))
 
     def __init__(self):
@@ -22,11 +25,13 @@ class Config:
         self.html_report_path = Config.path_dir + '\\Report\\html'
         if not os.path.exists(self.conf_path):
             raise FileNotFoundError("请确保配置文件存在！")
-
         self.config.read(self.conf_path, encoding='utf-8')
         self.version_Id = self.get_conf(Config.VERSION_ID)
         self.area_id = self.get_conf(Config.AREA_ID)
         self.url = self.get_conf(Config.URL)
+        self.worldId_gong = self.get_conf("WORLDID_GONG")
+        self.worldId_pu1 = self.get_conf("WORLDID_PU1")
+        self.worldId_pu2 = self.get_conf("WORLDID_PU2")
 
     def get_conf(self, value, title=None):
         """
@@ -38,7 +43,7 @@ class Config:
         title = title or self.default_title
         return self.config.get(title, value)
 
-    def set_conf(self, value, text, title=None):
+    def set_conf(self, text, value, title=None):
         """
         配置文件修改
         :param title:
@@ -47,7 +52,7 @@ class Config:
         :return:
         """
         title = title or self.default_title
-        self.config.set(title, value, text)
+        self.config.set(title, text, value)
         with open(self.conf_path, "w+") as f:
             return self.config.write(f)
 
