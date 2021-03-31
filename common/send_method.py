@@ -5,7 +5,7 @@ import requests
 import json
 from json import JSONDecodeError
 from common.config.config import Config, Default_Config
-
+import logging
 
 class SendMethod:
     session = None
@@ -37,6 +37,7 @@ class SendMethod:
                 response = json.loads(response.text)
                 if response["code"] != 0:
                     raise ValueError(f"接口请求失败: {response['message']}")
+                logging.info(response)
                 return response
             except JSONDecodeError:
                 # 当上面执行失败的时候，执行这个

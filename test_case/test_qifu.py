@@ -1,7 +1,7 @@
 from common.session import SendMethodEntity
 from common.config.config import Config
 from test_case.test_get_task import GetTask
-
+import logging
 
 class StartServer:
     def __init__(self):
@@ -12,6 +12,7 @@ class StartServer:
         # 添加serverlist
         url = self.url + "api/task/server-list"
         response = SendMethodEntity.send_method("post", url, data=data)
+        logging.info(response)
         task_id = response["data"]["taskId"]
         GetTask.test_code(task_id)
         return response
@@ -20,12 +21,14 @@ class StartServer:
         # 查询groupid对外时用到
         url = self.url + "api/resource/server-list/11"
         response = SendMethodEntity.send_method("get", url)
+        logging.info(response)
         return response
 
     def test_foreign(self, data):
         # 对外
         url = self.url + "api/task/foreign-world"
         response = SendMethodEntity.send_method("post", url, data=data)
+        logging.info(response)
         return response
 
     def test_script(self, data):
@@ -60,4 +63,10 @@ class StartServer:
         GetTask.test_code(task_id)
         return response
 
+    def test_stop_operate(self, data):
+        url = self.url + "api/task/stop-operate"
+        response = SendMethodEntity.send_method("post", url, data=data)
+        task_id = response["data"]["taskId"]
+        GetTask.test_code(task_id)
+        return response
 

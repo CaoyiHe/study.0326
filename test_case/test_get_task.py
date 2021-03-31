@@ -3,6 +3,7 @@ from common.config.config import Config, Default_Config
 import json
 from threading import Timer
 import time
+import logging
 
 
 class GetTask(object):
@@ -16,10 +17,10 @@ class GetTask(object):
         url = self.url + f"api/task/{self.taskId}/approve"
         data = {
             "remark": "接口执行通过",
-            "status": 0
+            "status": 1
         }
         response = SendMethodEntity.send_method("post", url, data=data)
-        print(response)
+        logging.info(response)
         return response
 
     def test_task_particulars(self):
@@ -29,9 +30,9 @@ class GetTask(object):
             url = self.url + f"api/task/{self.taskId}/detail"
             response = SendMethodEntity.send_method("get", url, )
             status = response["data"]["status"]
-            print(response)
-            if status == 7:
-                print(response)
+            logging.info(response)
+            if status == 7 or status == 4:
+                logging.info(response)
                 break
             if status == 8 or status == 30 or status == 20:
                 # 失败后对任务进行重试，重试三次后跳出循环

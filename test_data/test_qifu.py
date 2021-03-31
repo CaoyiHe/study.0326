@@ -189,46 +189,68 @@ class TestStart:
         response = self.qifu.test_clear(data)
         return response
 
-    # def test_foreign(self):
-    #     groupid = self.test_serverlist_add()
-    #     data = {
-    #         "rangeData": [
-    #             {
-    #                 "areaId": self.areaId,
-    #                 "worlds": [
-    #                     self.worldId_gong,
-    #                     self.worldId_pu1,
-    #                     self.worldId_pu2
-    #                 ]
-    #             }
-    #         ],
-    #         "extraIds": [],
-    #         "gameId": 2117,
-    #         "regionId": "TJZYY",
-    #         "executeTime": None,
-    #         "serverList": [
-    #             {
-    #                 "worldId": self.worldId_gong,
-    #                 "channelId": 21,
-    #                 "groupId": groupid,
-    #                 "recommend": 1,
-    #                 "channelName": "自动化测试",
-    #                 "groupName": self.groupname,
-    #                 "worldName": "自动化测试"
-    #             },
-    #             {
-    #                 "worldId": self.worldId_pu2,
-    #                 "channelId": 21,
-    #                 "groupId": groupid,
-    #                 "recommend": 1,
-    #                 "channelName": "自动化测试",
-    #                 "groupName": self.groupname,
-    #                 "worldName": "自动化测试"
-    #             }
-    #         ]
-    #     }
-    #     response = self.qifu.test_foreign(data)
-    #     return response
+    def test_stop_operate(self):
+        data = {
+            "rangeData": [
+                {
+                    "areaId": self.areaId,
+                    "worlds": [
+                        self.worldId_gong,
+                        self.worldId_pu1
+                    ]
+                }
+            ],
+            "extraIds": [],
+            "gameId": 2117,
+            "regionId": "TJZYY",
+            "executeTime": None
+        }
+        response = self.qifu.test_stop_operate(data)
+        worldId_gong = str(int(self.config.worldId_gong) + 1)
+        print(worldId_gong)
+        self.config.set_conf(self.config.WORLDID_GONG, worldId_gong)
+        return response
+
+        # def test_foreign(self):
+        #     groupid = self.test_serverlist_add()
+        #     data = {
+        #         "rangeData": [
+        #             {
+        #                 "areaId": self.areaId,
+        #                 "worlds": [
+        #                     self.worldId_gong,
+        #                     self.worldId_pu1,
+        #                     self.worldId_pu2
+        #                 ]
+        #             }
+        #         ],
+        #         "extraIds": [],
+        #         "gameId": 2117,
+        #         "regionId": "TJZYY",
+        #         "executeTime": None,
+        #         "serverList": [
+        #             {
+        #                 "worldId": self.worldId_gong,
+        #                 "channelId": 21,
+        #                 "groupId": groupid,
+        #                 "recommend": 1,
+        #                 "channelName": "自动化测试",
+        #                 "groupName": self.groupname,
+        #                 "worldName": "自动化测试"
+        #             },
+        #             {
+        #                 "worldId": self.worldId_pu2,
+        #                 "channelId": 21,
+        #                 "groupId": groupid,
+        #                 "recommend": 1,
+        #                 "channelName": "自动化测试",
+        #                 "groupName": self.groupname,
+        #                 "worldName": "自动化测试"
+        #             }
+        #         ]
+        #     }
+        #     response = self.qifu.test_foreign(data)
+        #     return response
 
 
 if __name__ == '__main__':
