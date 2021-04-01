@@ -8,8 +8,8 @@ import datetime
 import time
 
 
-class Maintenance(object):
-    def __int__(self):
+class Maintenance:
+    def __init__(self):
         self.qifu = StartServer()
         self.config = Config()
         self.worldId_gong = int(self.config.get_conf("worldId_gong"))
@@ -170,7 +170,7 @@ class Maintenance(object):
                 },
                 "mergeArea": [
                     {
-                        "toWorldId": self.worldname_pu1,
+                        "toWorldId": self.worldId_pu1,
                         "toPublicId": self.worldId_gong,
                         "fromWorldId": self.worldId_pu2,
                         "fromCountryId": 1,
@@ -273,5 +273,3 @@ class Maintenance(object):
         return response
 
 
-if __name__ == '__main__':
-    Maintenance().test_maintenance_gm()

@@ -2,6 +2,7 @@ from common.session import SendMethodEntity
 from common.config.config import Config
 from test_case.test_get_task import GetTask
 import logging
+import time
 
 class StartServer:
     def __init__(self):
@@ -28,8 +29,9 @@ class StartServer:
         # 对外
         url = self.url + "api/task/foreign-world"
         response = SendMethodEntity.send_method("post", url, data=data)
-        task_id = response["data"]["taskId"]
-        GetTask.test_task_particulars(task_id)
+        time.sleep(10)
+        # task_id = response["data"]["taskId"]
+        # GetTask.test_task_particulars(task_id)
         logging.info(response)
         return response
 
