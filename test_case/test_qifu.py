@@ -4,6 +4,7 @@ from test_case.test_get_task import GetTask
 import logging
 import time
 
+
 class StartServer:
     def __init__(self):
         self.config = Config()
@@ -82,4 +83,3 @@ class StartServer:
         task_id = response["data"]["taskId"]
         GetTask.test_code(task_id)
         return response
-

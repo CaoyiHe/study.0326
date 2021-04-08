@@ -5,19 +5,28 @@ import requests
 import json
 from json import JSONDecodeError
 from common.config.config import Config, Default_Config
+# from common.config.config import Config
 import logging
+
+logging.basicConfig(level='INFO', filename="G:\study\log\log.txt",
+                    format='[%(asctime)s: %(levelname)s/%(filename)s:%(lineno)d] %(message)s')
+
 
 class SendMethod:
     session = None
 
     def __init__(self, session):
         self.session = session
+        self.config = Config()
+        self.game_id = self.config.game_id
+        self.region_id = self.config.region_id
 
     def send_method(self, method, url, params=None, data=None, headers=None):
         """封装请求方式"""
 
         if headers is None:
-            headers = {"gameId": Default_Config["gameId"], "regionId": Default_Config["regionId"]}
+            # headers = {"gameId": Default_Config["gameId"], "regionId": Default_Config["regionId"]}
+            headers = {"gameId": self.game_id, "regionId": self.region_id}
         if method == "get" or method == "delete":
             # 如果
             response = self.session.request(method=method, url=url, params=params, headers=headers)

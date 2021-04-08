@@ -240,5 +240,3 @@ class TestStart:
         return response
 
 
-if __name__ == '__main__':
-    TestStart().test_stop_operate()
