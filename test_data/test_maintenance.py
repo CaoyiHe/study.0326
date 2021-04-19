@@ -279,3 +279,5 @@ class Maintenance(Config):
 if __name__ == '__main__':
     test = Maintenance()
     test.test_maintenance_cq()
+    test.test_maintenance_bb()
+    test.test_maintenance_gm()

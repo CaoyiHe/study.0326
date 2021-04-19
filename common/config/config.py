@@ -14,6 +14,7 @@ class Config:
     WORLDID_PU2 = "worldId_pu2"
     GAME_ID = "game_id"
     REGION_ID = "region_id"
+    PARAMID = "paramId"
     path_dir = str(os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir)))
 
     def __init__(self):
@@ -28,14 +29,15 @@ class Config:
         if not os.path.exists(self.conf_path):
             raise FileNotFoundError("请确保配置文件存在！")
         self.config.read(self.conf_path, encoding='utf-8')
-        self.version_id = self.get_conf(Config.VERSION_ID)
+        self.version_id = int(self.get_conf(Config.VERSION_ID))
         self.area_id = int(self.get_conf(Config.AREA_ID))
         self.url = self.get_conf(Config.URL)
-        self.worldId_gong = self.get_conf("WORLDID_GONG")
-        self.worldId_pu1 = self.get_conf("WORLDID_PU1")
-        self.worldId_pu2 = self.get_conf("WORLDID_PU2")
-        self.game_id = self.get_conf(Config.GAME_ID)
+        self.worldId_gong = int(self.get_conf("WORLDID_GONG"))
+        self.worldId_pu1 = int(self.get_conf("WORLDID_PU1"))
+        self.worldId_pu2 = int(self.get_conf("WORLDID_PU2"))
+        self.game_id = int(self.get_conf(Config.GAME_ID))
         self.region_id = str(self.get_conf(Config.REGION_ID))
+        self.param_id = self.get_conf(Config.PARAMID)
 
     def get_conf(self, value, title=None):
         """
@@ -79,4 +81,4 @@ Default_Config["regionId"] = conf.get_conf("region_id")
 Default_Config["url"] = conf.get_conf("url")
 if __name__ == '__main__':
     conf = Config()
-    print(conf.get_conf('url'))
+    print(type(conf.get_conf('game_id')))

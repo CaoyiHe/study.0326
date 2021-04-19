@@ -26,7 +26,7 @@ class SendMethod:
 
         if headers is None:
             # headers = {"gameId": Default_Config["gameId"], "regionId": Default_Config["regionId"]}
-            headers = {"gameId": self.game_id, "regionId": self.region_id}
+            headers = {"gameId": str(self.game_id), "regionId": self.region_id}
         if method == "get" or method == "delete":
             # 如果
             response = self.session.request(method=method, url=url, params=params, headers=headers)

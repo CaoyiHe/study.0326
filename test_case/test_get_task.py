@@ -18,7 +18,7 @@ class GetTask(object):
         url = self.url + f"api/task/{self.taskId}/approve"
         data = {
             "remark": "接口执行通过",
-            "status": 1
+            "status": 0
         }
         response = SendMethodEntity.send_method("post", url, data=data)
         logging.info(response)
@@ -37,7 +37,7 @@ class GetTask(object):
                 break
             if status == 8 or status == 30 or status == 20:
                 # 失败后对任务进行重试，重试三次后跳出循环
-                if count >= 1:
+                if count >= 3:
                     raise ValueError("重试失败")
                 count += 1
                 response = SendMethodEntity.send_method("post", self.url + f"api/task/{self.taskId}/retry-skip", data={

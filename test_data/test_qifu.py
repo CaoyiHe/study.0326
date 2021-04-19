@@ -6,8 +6,9 @@ import datetime
 import time
 
 
-class TestStart:
+class TestStart(Config):
     def __init__(self):
+        super().__init__()
         self.qifu = StartServer()
         self.config = Config()
         self.worldId_gong = int(self.config.get_conf("worldId_gong"))
@@ -20,8 +21,8 @@ class TestStart:
     def test_serverlist_add(self):
         # serverlist修改完成后，对新区进行对外
         data = {
-            "gameId": 2117,
-            "regionId": "TJZYY",
+            "gameId": self.game_id,
+            "regionId": self.region_id,
             "areaId": None,
             "serverListId": 11,
             "data": [
@@ -55,8 +56,8 @@ class TestStart:
                 }
             ],
             "extraIds": [],
-            "gameId": 2117,
-            "regionId": "TJZYY",
+            "gameId": self.game_id,
+            "regionId": self.region_id,
             "executeTime": None,
             "serverList": [
                 {
@@ -66,7 +67,7 @@ class TestStart:
                     "recommend": 1,
                     "channelName": "自动化测试",
                     "groupName": self.groupname,
-                    "worldName": str(self.worldId_pu1) + "-回归测试-普通区-1"
+                    "worldName": str(self.worldId_pu1) + "-自动化-普通区-1"
                 },
                 {
                     "worldId": self.worldId_pu2,
@@ -75,7 +76,7 @@ class TestStart:
                     "recommend": 1,
                     "channelName": "自动化测试",
                     "groupName": self.groupname,
-                    "worldName": str(self.worldId_pu2) + "-回归测试-普通区-2"
+                    "worldName": str(self.worldId_pu2) + "-自动化-普通区-2"
                 }
             ]
         }
@@ -97,8 +98,8 @@ class TestStart:
             "extraIds": [
                 self.worldId_gong
             ],
-            "gameId": 2117,
-            "regionId": "TJZYY",
+            "gameId": self.game_id,
+            "regionId": self.region_id,
             "executeTime": None,
             "serverList": []
         }
@@ -119,8 +120,8 @@ class TestStart:
                     ]
                 }
             ],
-            "gameId": 2117,
-            "regionId": "TJZYY",
+            "gameId": self.game_id,
+            "regionId": self.region_id,
             "fileList": [
                 {
                     "sort": 1,
@@ -152,8 +153,8 @@ class TestStart:
                 }
             ],
             "extraIds": [],
-            "gameId": 2117,
-            "regionId": "TJZYY",
+            "gameId": self.game_id,
+            "regionId": self.region_id,
             "isForceKill": 1,
             "executeTime": None
         }
@@ -174,8 +175,8 @@ class TestStart:
                 }
             ],
             "extraIds": [],
-            "gameId": 2117,
-            "regionId": "TJZYY",
+            "gameId": self.game_id,
+            "regionId": self.region_id,
             "executeTime": None,
             "specId": None,
             "specName": None,
@@ -199,12 +200,12 @@ class TestStart:
                 }
             ],
             "extraIds": [],
-            "gameId": 2117,
-            "regionId": "TJZYY",
+            "gameId": self.game_id,
+            "regionId": self.region_id,
             "clearTime": None,
             "isBook": 0,
             "preCreateTime": None,
-            "openTime": datetime.datetime.utcnow().isoformat() + 'Z',
+            "openTime": (datetime.datetime.utcnow() + datetime.timedelta(hours=0.5)).isoformat() + 'Z',
             "isForeign": 0,
             "foreignTime": None,
             "serverList": []
@@ -225,8 +226,8 @@ class TestStart:
                 }
             ],
             "extraIds": [],
-            "gameId": 2117,
-            "regionId": "TJZYY",
+            "gameId": self.game_id,
+            "regionId": self.region_id,
             "executeTime": None
         }
         response = self.qifu.test_stop_operate(data)
@@ -239,4 +240,6 @@ class TestStart:
         self.config.set_conf(self.config.WORLDID_PU2, worldId_pu2)
         return response
 
-
+if __name__ == '__main__':
+    test = TestStart()
+    test.test_stop_operate()
