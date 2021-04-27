@@ -17,7 +17,6 @@ class TestOpen:
         return response
 
     def test_open_pu(self, data):
-        print(data)
         # 开普通区
         response = SendMethodEntity.send_method("post", self.url, data=data)
         task_id = response["data"]["taskIds"][0]

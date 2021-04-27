@@ -240,6 +240,7 @@ class TestStart(Config):
         self.config.set_conf(self.config.WORLDID_PU2, worldId_pu2)
         return response
 
+
 if __name__ == '__main__':
     test = TestStart()
     test.test_stop_operate()

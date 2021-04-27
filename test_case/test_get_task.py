@@ -43,7 +43,7 @@ class GetTask(object):
                 response = SendMethodEntity.send_method("post", self.url + f"api/task/{self.taskId}/retry-skip", data={
                     "action": 1
                 })
-            time.sleep(10)
+            time.sleep(30)
 
     @staticmethod
     def test_code(task_id):
