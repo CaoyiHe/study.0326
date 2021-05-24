@@ -24,6 +24,7 @@ class Maintenance(Config):
         self.worldname_gong = str(self.worldId_gong) + "-回归测试-公共区"
         self.worldname_pu1 = str(self.worldId_gong) + "-回归测试-普通区-1"
         self.worldname_pu2 = str(self.worldId_gong) + "-回归测试-普通区-2"
+        self.specsId_pu = 96
 
     def test_maintenance_cq(self):
         # 例行重启
@@ -72,7 +73,7 @@ class Maintenance(Config):
             "data": {
                 "editSpecs": [
                     {
-                        "specsId": 60,
+                        "specsId": self.specsId_pu,  # k8s 改60
                         "specsName": None,
                         "worldId": self.worldId_pu1,
                         "worldName": self.worldname_pu1,
@@ -81,7 +82,7 @@ class Maintenance(Config):
                         "groupIndex": 0
                     },
                     {
-                        "specsId": 60,
+                        "specsId": self.specsId_pu,  # k8s 改60
                         "specsName": None,
                         "worldId": self.worldId_pu2,
                         "worldName": self.worldname_pu2,
@@ -236,7 +237,7 @@ class Maintenance(Config):
                 ],
                 "editSpecs": [
                     {
-                        "specsId": 46,
+                        "specsId": self.specsId_pu,  # k8s 改46
                         "specsName": None,
                         "worldId": self.worldId_pu1,
                         "worldName": self.worldname_pu1,

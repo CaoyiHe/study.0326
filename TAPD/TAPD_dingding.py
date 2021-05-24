@@ -40,11 +40,12 @@ class TestTaPd:
                 "text": f"## ![image]({png_url})\n ## 今日新增BUG\n > https://www.tapd.cn/44506107/bugtrace/bugreports/my_view?conf_id=1144506107001108601&query_token=2021042786e525af8f67b4b3d2c89c802a0a990e",
             }
         }
-        response = requests.post(url=self.ding_url, headers= self.headers, data=json.dumps(data), verify=False)
+        response = requests.post(url=self.ding_url, headers=self.headers, data=json.dumps(data), verify=False)
         time.sleep(3)
-        self.driver.get(
-            'https://www.tapd.cn/44506107/bugtrace/bugreports/stat_general/general/customreport-1144506107001000073')
-        time.sleep(5)
+        # self.driver.get(
+        #     'https://www.tapd.cn/44506107/bugtrace/bugreports/stat_general/general/customreport-1144506107001000073')
+        self.driver.find_element_by_link_text('今日线上BUG').click()
+        time.sleep(3)
         everyday_prod = "C:\\Users\\hecaoyi\\Desktop\\永久包\\今日线上BUG.png"
         self.driver.get_screenshot_as_file(everyday_prod)
         png_url = TestTaPd().test_upload_image(file_path=everyday_prod)
@@ -55,11 +56,12 @@ class TestTaPd:
                 "text": f"## ![image]({png_url})\n ## 今日线上BUG\n > https://www.tapd.cn/44506107/bugtrace/bugreports/my_view?conf_id=1144506107001109309&query_token=2021042750f9c73beed7aed7c6c43a646cda3b34",
             }
         }
-        response = requests.post(url=self.ding_url, headers= self.headers, data=json.dumps(data), verify=False)
-        time.sleep(5)
-        self.driver.get(
-            'https://www.tapd.cn/44506107/bugtrace/bugreports/stat_general/general/customreport-1144506107001000074')
-        time.sleep(5)
+        response = requests.post(url=self.ding_url, headers=self.headers, data=json.dumps(data), verify=False)
+        time.sleep(3)
+        # self.driver.get(
+        #     'https://www.tapd.cn/44506107/bugtrace/bugreports/stat_general/general/customreport-1144506107001000074')
+        self.driver.find_element_by_link_text('当前未解决BUG').click()
+        time.sleep(3)
         all_bug = "C:\\Users\\hecaoyi\\Desktop\\永久包\\目前剩余BUG.png"
         self.driver.get_screenshot_as_file(all_bug)
         png_url = TestTaPd().test_upload_image(file_path=all_bug)
@@ -70,7 +72,7 @@ class TestTaPd:
                 "text": f"## ![image]({png_url})\n ## 目前剩余BUG\n > https://www.tapd.cn/44506107/bugtrace/bugreports/my_view?conf_id=1144506107001109095&query_token=20210427c0320a08057dd99920437b1088712039",
             }
         }
-        response = requests.post(url=self.ding_url, headers= self.headers, data=json.dumps(data), verify=False)
+        response = requests.post(url=self.ding_url, headers=self.headers, data=json.dumps(data), verify=False)
         time.sleep(3)
         self.driver.quit()
         # url = 'https://riyugo.com/file.php'
@@ -84,7 +86,6 @@ class TestTaPd:
         # print(png)
         # with open(imagePath, "rb") as f:  # 转为二进制格式
         #     base64_data = base64.b64encode(f.read())  # 使用base64进行加密
-
 
     def test_ding(self, png_url):
         url = "https://oapi.dingtalk.com/robot/send?access_token=040304fa7f88fdfa1e305519580fb75917208c2be77b35db56a79e72ac60ee88"

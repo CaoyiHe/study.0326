@@ -13,6 +13,8 @@ class OpenService(Config):
         super().__init__()
         # self.code = -1
         self.open = TestOpen()
+        self.specsId_pu = 96
+        self.specsId_gong = 98
         # self.config = Config()
         # self.worldId_gong = int(self.config.get_conf("worldId_gong"))
         # self.worldId_pu1 = int(self.config.get_conf("worldId_pu1"))
@@ -36,7 +38,7 @@ class OpenService(Config):
                     "executeTime": None,
                     "openTime": datetime.datetime.utcnow().isoformat() + 'Z',
                     "preCreateTime": None,
-                    "specId": 43,
+                    "specId": self.specsId_gong,   # K8S 改成43
                     "worldName": str(self.worldId_gong) + "-自动化-公共区"
                 }
             ]
@@ -62,7 +64,7 @@ class OpenService(Config):
                     "executeTime": None,
                     "openTime": datetime.datetime.utcnow().isoformat() + 'Z',
                     "preCreateTime": None,
-                    "specId": 60,
+                    "specId": self.specsId_pu,   # K8S 改成60
                     "worldName": str(self.worldId_gong) + "-自动化-普通区-1"
                 }
             ]
@@ -85,7 +87,7 @@ class OpenService(Config):
                     "executeTime": None,
                     "openTime": datetime.datetime.utcnow().isoformat() + 'Z',
                     "preCreateTime": None,
-                    "specId": 60,
+                    "specId": self.specsId_pu,   # K8S 改成60
                     "worldName": str(self.worldId_gong) + "-自动化-普通区-2"
                 }
             ]

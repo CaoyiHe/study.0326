@@ -45,6 +45,10 @@ class GetTask(object):
                 })
             time.sleep(30)
 
+    def test_reject(self):
+        url = url = self.url + f"api/task/{self.taskId}/approve"
+        pass
+
     @staticmethod
     def test_code(task_id):
         Get_Task = GetTask(task_id)

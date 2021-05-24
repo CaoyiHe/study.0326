@@ -30,7 +30,7 @@ class TestStart(Config):
                     "opsType": 4,
                     "row": {
                         "name": self.groupname,
-                        "channelId": 48,
+                        "channelId": 99,
                         "sort": 1
                     },
                     "info": {
@@ -44,6 +44,7 @@ class TestStart(Config):
         grouplist = self.qifu.test_groupid(self.groupname)['data'][1]['groupList']
         group = next(x for x in grouplist if x['name'] == self.groupname)
         groupid = group["id"]
+        time.sleep(2)
         data = {
             "rangeData": [
                 {
@@ -205,7 +206,7 @@ class TestStart(Config):
             "clearTime": None,
             "isBook": 0,
             "preCreateTime": None,
-            "openTime": (datetime.datetime.utcnow() + datetime.timedelta(hours=0.5)).isoformat() + 'Z',
+            "openTime": (datetime.datetime.utcnow() + datetime.timedelta(hours=24)).isoformat() + 'Z',
             "isForeign": 0,
             "foreignTime": None,
             "serverList": []
