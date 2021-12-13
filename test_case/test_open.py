@@ -9,7 +9,7 @@ class TestOpen:
         self.config = Config()
         self.url = self.config.get_conf('url') + "api/task/open-server"
 
-    def test_open_gong(self, data, ):
+    def test_open_gong(self, data):
         # 开公共区
         response = SendMethodEntity.send_method("post", self.url, data=data)
         task_id = response["data"]["taskIds"][0]

@@ -5,10 +5,10 @@ import logging
 import time
 
 
-class StartServer:
-    def __init__(self):
-        self.config = Config()
-        self.url = self.config.get_conf("url")
+class StartServer(Config):
+
+    # def __init__(self):
+    #     super(StartServer, self).__init__()
 
     def test_serverlist_add(self, data):
         # 添加serverlist
@@ -49,6 +49,8 @@ class StartServer:
         url = self.url + "api/task/close-game-world"
         response = SendMethodEntity.send_method("post", url, data=data)
         task_id = response["data"]["taskId"]
+        GetTask.test_revocation(task_id)
+        response = SendMethodEntity.send_method("put", url + f"/{task_id}", data=data)
         GetTask.test_code(task_id)
         return response
 
@@ -57,6 +59,8 @@ class StartServer:
         url = self.url + "api/task/start-game-world"
         response = SendMethodEntity.send_method("post", url, data=data)
         task_id = response["data"]["taskId"]
+        GetTask.test_revocation(task_id)
+        response = SendMethodEntity.send_method("put", url + f"/{task_id}", data=data)
         GetTask.test_code(task_id)
         return response
 
@@ -65,6 +69,31 @@ class StartServer:
         url = self.url + "api/task/clear-data"
         response = SendMethodEntity.send_method("post", url, data=data)
         task_id = response["data"]["taskId"]
+        GetTask.test_revocation(task_id)
+        response = SendMethodEntity.send_method("put", url + f"/{task_id}", data=data)
+        GetTask.test_code(task_id)
+        return response
+
+    def test_(self):
+        upload_url = self.url + "/api/resource/file/upload"
+        files = {'file': open(r'C:\Users\hecaoyi\Desktop\新建文件夹\ChatControl.csv', 'rb')}
+        data = {
+            "gameId": self.game_id,
+            "regionId": self.region_id,
+            "name": "ChatControl.csv"
+        }
+        response = SendMethodEntity.send_method("post", url=upload_url, data=data, files=files)
+        filePath = response["data"]["filePath"]
+        return filePath
+
+    def test_container_upload(self, data):
+        # 文件上传
+        filePath = StartServer().test_()
+        url = self.url + "api/task/container-upload"
+        response = SendMethodEntity.send_method("post", url, data=data)
+        task_id = response["data"]["taskId"]
+        GetTask.test_revocation(task_id)
+        response = SendMethodEntity.send_method("put", url + f"/{task_id}", data=data)
         GetTask.test_code(task_id)
         return response
 
@@ -73,13 +102,17 @@ class StartServer:
         url = self.url + "api/task/stop-operate"
         response = SendMethodEntity.send_method("post", url, data=data)
         task_id = response["data"]["taskId"]
+        GetTask.test_revocation(task_id)
+        response = SendMethodEntity.send_method("put", url + f"/{task_id}", data=data)
         GetTask.test_code(task_id)
         return response
 
     def test_maintenance(self, data):
         # 停服维护
-        url = self.url + "api/task/stop-maintenance"
+        url = self.url + "api/task/maintenance"
         response = SendMethodEntity.send_method("post", url, data=data)
         task_id = response["data"]["taskId"]
+        GetTask.test_revocation(task_id)
+        response = SendMethodEntity.send_method("put", url + f"/{task_id}", data=data)
         GetTask.test_code(task_id)
         return response

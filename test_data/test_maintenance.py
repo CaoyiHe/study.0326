@@ -24,7 +24,6 @@ class Maintenance(Config):
         self.worldname_gong = str(self.worldId_gong) + "-回归测试-公共区"
         self.worldname_pu1 = str(self.worldId_gong) + "-回归测试-普通区-1"
         self.worldname_pu2 = str(self.worldId_gong) + "-回归测试-普通区-2"
-        self.specsId_pu = 96
 
     def test_maintenance_cq(self):
         # 例行重启
@@ -32,8 +31,8 @@ class Maintenance(Config):
             "gameId": self.game_id,
             "regionId": self.region_id,
             "types": "4",
-            "startTime": datetime.datetime.utcnow().isoformat() + 'Z',
-            "endTime": (datetime.datetime.utcnow() + timedelta(hours=0.5)).isoformat() + 'Z',
+            "startTime": (datetime.datetime.utcnow() + timedelta(hours=0.005)).isoformat() + 'Z',
+            "endTime": (datetime.datetime.utcnow() + timedelta(hours=0.6)).isoformat() + 'Z',
             "data": {
                 "restart": [
                     {
@@ -68,8 +67,8 @@ class Maintenance(Config):
             "gameId": self.game_id,
             "regionId": self.region_id,
             "types": "5",
-            "startTime": datetime.datetime.utcnow().isoformat() + 'Z',
-            "endTime": (datetime.datetime.utcnow() + timedelta(hours=0.5)).isoformat() + 'Z',
+            "startTime": (datetime.datetime.utcnow() + timedelta(hours=0.005)).isoformat() + 'Z',
+            "endTime": (datetime.datetime.utcnow() + timedelta(hours=0.6)).isoformat() + 'Z',
             "data": {
                 "editSpecs": [
                     {
@@ -104,8 +103,8 @@ class Maintenance(Config):
             "gameId": self.game_id,
             "regionId": self.region_id,
             "types": "1",
-            "startTime": datetime.datetime.utcnow().isoformat() + 'Z',
-            "endTime": (datetime.datetime.utcnow() + timedelta(hours=0.5)).isoformat() + 'Z',
+            "startTime": (datetime.datetime.utcnow() + timedelta(hours=0.005)).isoformat() + 'Z',
+            "endTime": (datetime.datetime.utcnow() + timedelta(hours=0.6)).isoformat() + 'Z',
             "data": {
                 "versionUpdate": {
                     "areaId": self.area_id,
@@ -138,14 +137,15 @@ class Maintenance(Config):
         response = self.qifu.test_maintenance(data)
         return response
 
+
     def test_maintenance_hq_gx(self):
         # 合区+版本更新
         data = {
             "gameId": self.game_id,
             "regionId": self.region_id,
             "types": "1,2",
-            "startTime": datetime.datetime.utcnow().isoformat() + 'Z',
-            "endTime": (datetime.datetime.utcnow() + timedelta(hours=0.5)).isoformat() + 'Z',
+            "startTime": (datetime.datetime.utcnow() + timedelta(hours=0.005)).isoformat() + 'Z',
+            "endTime": (datetime.datetime.utcnow() + timedelta(hours=0.6)).isoformat() + 'Z',
             "data": {
 
                 "versionUpdate": {
@@ -203,8 +203,8 @@ class Maintenance(Config):
             "gameId": self.game_id,
             "regionId": self.region_id,
             "types": "1,2,3,5",
-            "startTime": datetime.datetime.utcnow().isoformat() + 'Z',
-            "endTime": (datetime.datetime.utcnow() + timedelta(hours=0.5)).isoformat() + 'Z',
+            "startTime": (datetime.datetime.utcnow() + timedelta(hours=0.005)).isoformat() + 'Z',
+            "endTime": (datetime.datetime.utcnow() + timedelta(hours=0.6)).isoformat() + 'Z',
             "data": {
                 "versionUpdate": {
                     "areaId": None,
@@ -259,8 +259,8 @@ class Maintenance(Config):
             "gameId": self.game_id,
             "regionId": self.region_id,
             "types": "3",
-            "startTime": datetime.datetime.utcnow().isoformat() + 'Z',
-            "endTime": (datetime.datetime.utcnow() + timedelta(hours=0.5)).isoformat() + 'Z',
+            "startTime": (datetime.datetime.utcnow() + timedelta(hours=0.005)).isoformat() + 'Z',
+            "endTime": (datetime.datetime.utcnow() + timedelta(hours=0.6)).isoformat() + 'Z',
             "data": {
                 "editName": [
                     {

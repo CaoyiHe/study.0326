@@ -1,3 +1,4 @@
+#coding=utf-8
 from configparser import ConfigParser
 # from Common import log
 import os
@@ -15,13 +16,16 @@ class Config:
     GAME_ID = "game_id"
     REGION_ID = "region_id"
     PARAMID = "paramId"
+    SPECSID_GONG = "specsId_gong"
+    SPECSID_PU = "specsId_pu"
     path_dir = str(os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir)))
 
     def __init__(self):
         """
         初始化
         """
-        self.default_title = "config"
+        # self.default_title = "config-SS"
+        self.default_title = Config.default_title
         self.config = ConfigParser()
         self.conf_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.ini')
         self.xml_report_path = Config.path_dir + '\\Report\\xml'
@@ -38,6 +42,8 @@ class Config:
         self.game_id = int(self.get_conf(Config.GAME_ID))
         self.region_id = str(self.get_conf(Config.REGION_ID))
         self.param_id = self.get_conf(Config.PARAMID)
+        self.specsId_pu = int(self.get_conf("SPECSID_PU"))
+        self.specsId_gong = int(self.get_conf("SPECSID_GONG"))
 
     def get_conf(self, value, title=None):
         """
@@ -72,7 +78,7 @@ class Config:
         self.config.add_section(title)
         with open(self.conf_path, "w+") as f:
             return self.config.write(f)
-
+    default_title = input("(2117:远征2, 2107：远征, 2122：闪烁精灵, 2109：龙武手游, 2029：少女战争)请输入游戏：")
 
 Default_Config = {}
 conf = Config()

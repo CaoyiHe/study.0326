@@ -12,6 +12,7 @@ class GetTask(object):
         self.config = Config()
         self.url = self.config.get_conf('url')
         self.taskId = taskId
+        self.ins = ''
 
     def test_check(self):
         # 对提交的任务进行审核
@@ -19,6 +20,17 @@ class GetTask(object):
         data = {
             "remark": "接口执行通过",
             "status": 0
+        }
+        response = SendMethodEntity.send_method("post", url, data=data)
+        logging.info(response)
+        return response
+
+    def test_task_revocation(self):
+        # 对任务进行驳回
+        url = self.url + f"api/task/{self.taskId}/approve"
+        data = {
+            "remark": "接口执行驳回",
+            "status": 1
         }
         response = SendMethodEntity.send_method("post", url, data=data)
         logging.info(response)
@@ -54,6 +66,12 @@ class GetTask(object):
         Get_Task = GetTask(task_id)
         Get_Task.test_check()
         Get_Task.test_task_particulars()
+
+    @staticmethod
+    def test_revocation(task_id):
+        Get_revocation = GetTask(task_id)
+        Get_revocation.test_task_revocation()
+        Get_revocation.test_task_particulars()
 
 
 if __name__ == '__main__':
